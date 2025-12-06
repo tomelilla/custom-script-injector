@@ -107,5 +107,39 @@
         "content": "$1"
       }
     }
+  },
+  "backupProgress": {
+    "message": "Backing up..."
+  },
+  "backupSuccess": {
+    "message": "Backup successful!"
+  },
+  "backupFail": {
+    "message": "Backup failed: $1",
+    "placeholders": {
+      "1": {
+        "content": "$1"
+      }
+    }
+  },
+  "restoreProgress": {
+    "message": "Restoring..."
+  },
+  "restoreSuccess": {
+    "message": "Restore successful!"
+  },
+  "restoreFail": {
+    "message": "Restore failed: $1",
+    "placeholders": {
+      "1": {
+        "content": "$1"
+      }
+    }
+  },
+  "restoreConfirmMsg": {
+    "message": "This will replace all your current scripts with the backup from Gist. Are you sure?"
+  },
+  "openSiteBtn": {
+    "message": "Open Website"
   }
 }

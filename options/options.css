@@ -74,6 +74,9 @@ body {
   padding: 10px 15px;
   cursor: pointer;
   border-bottom: 1px solid transparent;
+  display: block;
+  text-decoration: none;
+  color: inherit;
 }
 
 .domain-item:hover {
@@ -121,6 +124,21 @@ body {
   align-items: center;
 }
 
+#current-domain-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+}
+
+#current-domain-title:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: var(--border-color);
+}
+
 .actions {
   display: flex;
   align-items: center;
@@ -143,6 +161,11 @@ button {
 
 .primary-btn:hover {
   background-color: var(--accent-hover);
+}
+
+#open-domain-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
 }
 
 .danger-btn {

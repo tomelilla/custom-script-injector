@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const currentDomainTitle = document.getElementById('current-domain-title');
   const deleteDomainBtn = document.getElementById('delete-domain-btn');
+  const openDomainBtn = document.getElementById('open-domain-btn');
   const saveBtn = document.getElementById('save-btn');
   const saveStatus = document.getElementById('save-status');
 
@@ -65,10 +66,96 @@ document.addEventListener('DOMContentLoaded', async () => {
     "Ctrl-S": function(cm) { saveCurrentDomain(); }
   });
 
-  loadAllData();
+  loadAllDataAndInit();
   loadGitHubToken();
 
   // --- Event Listeners ---
+
+  // Alias Input Shortcut
+  if (domainAliasInput) {
+    domainAliasInput.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
+            e.preventDefault();
+            saveCurrentDomain();
+        }
+    });
+  }
+
+  // Domain Renaming
+  currentDomainTitle.addEventListener('click', () => {
+      const input = document.getElementById('domain-rename-input');
+      if (!input) return;
+
+      input.value = currentDomain;
+      currentDomainTitle.classList.add('hidden');
+      input.classList.remove('hidden');
+      input.focus();
+  });
+
+  const domanRenameInput = document.getElementById('domain-rename-input');
+  if (domanRenameInput) {
+      domanRenameInput.addEventListener('blur', finishRename);
+      domanRenameInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+              finishRename();
+          } else if (e.key === 'Escape') {
+              cancelRename();
+          }
+      });
+  }
+
+  function cancelRename() {
+      const input = document.getElementById('domain-rename-input');
+      input.classList.add('hidden');
+      currentDomainTitle.classList.remove('hidden');
+  }
+
+  function finishRename() {
+      const input = document.getElementById('domain-rename-input');
+      const newDomain = input.value.trim();
+
+      // If no change or empty
+      if (!newDomain || newDomain === currentDomain) {
+          cancelRename();
+          return;
+      }
+
+      // Check if exists
+      if (allData[newDomain]) {
+          alert(window.msg('domainExistsMsg'));
+          cancelRename();
+          return;
+      }
+
+      // Perform Rename
+
+      // 1. Copy data
+      const domainData = { ...allData[currentDomain] };
+      allData[newDomain] = domainData;
+      delete allData[currentDomain];
+
+      // 2. Storage Update
+      // We need to set new key and remove old key
+      const saveObj = {};
+      saveObj[newDomain] = domainData;
+
+      chrome.storage.sync.set(saveObj, () => {
+          chrome.storage.sync.remove(currentDomain, () => {
+               // 3. Update UI
+               const oldDomain = currentDomain;
+               currentDomain = newDomain;
+
+               // Update URL
+               const newUrl = new URL(window.location);
+               newUrl.searchParams.set('domain', newDomain);
+               window.history.pushState({ domain: newDomain }, '', newUrl);
+
+               currentDomainTitle.textContent = newDomain;
+               cancelRename();
+               renderDomainList();
+          });
+      });
+  }
 
   // Add Domain
   addDomainBtn.addEventListener('click', () => {
@@ -140,6 +227,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
+  // Open Domain
+  if (openDomainBtn) {
+    openDomainBtn.addEventListener('click', () => {
+        if (!currentDomain) return;
+
+        let url = currentDomain;
+        if (!url.startsWith('http://') && !url.startsWith('https://')) {
+            url = 'https://' + url;
+        }
+        window.open(url, '_blank');
+    });
+  }
+
 
 
   // Export
@@ -179,7 +279,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (confirm(window.msg('importConfirmMsg'))) {
           chrome.storage.sync.set(data, () => {
             alert(window.msg('importSuccessMsg'));
-            loadAllData();
+            loadAllDataAndInit(); // Reload
              // Reset file input
             importFile.value = '';
           });
@@ -211,7 +311,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   saveTokenBtn.addEventListener('click', () => {
     const token = githubTokenInput.value.trim();
     if (token) {
-      chrome.storage.local.set({ githubToken: token }, () => {
+      // Save to SYNC storage so it roams across devices
+      chrome.storage.sync.set({ githubToken: token }, () => {
         window.githubService.setToken(token);
         alert(window.msg('tokenSaved'));
         updateGitHubUI(true);
@@ -224,6 +325,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       try {
         chrome.storage.sync.get(null, async (items) => {
             const dataToUpload = items || {};
+            // Filter out token from the data being uploaded to Gist itself?
+            // Ideally yes, but stripping it from the upload payload is good practice.
+            // github-helper likely handles data structure.
             await window.githubService.uploadData(dataToUpload);
             syncStatus.textContent = window.msg('backupSuccess');
             setTimeout(() => syncStatus.textContent = '', 3000);
@@ -235,16 +339,36 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
   gistRestoreBtn.addEventListener('click', async () => {
-      if (!confirm(window.msg('restoreConfirm'))) return;
+      if (!confirm(window.msg('restoreConfirmMsg'))) return;
 
       syncStatus.textContent = window.msg('restoreProgress');
       try {
           const data = await window.githubService.downloadData();
-          chrome.storage.sync.set(data, () => {
-             loadAllData();
-             syncStatus.textContent = window.msg('restoreSuccess');
-             setTimeout(() => syncStatus.textContent = '', 3000);
-          });
+          if (data) {
+              // Be careful not to wipe the token if it's not in the backup (or if it is)
+              // Ideally we merge or just set. Since backup contains everything from sync storage,
+              // it likely contains the token too if it was there during backup.
+              // But we should probably preserve the CURRENT token just in case the backup has an old one or none.
+
+              // Actually, let's just do a direct set, but maybe re-save the current token if it gets lost?
+              // Or better, let's trust the backup. But wait, if token is lost, we can't sync anymore.
+              // Let's safe-guard the token.
+
+              const currentToken = githubTokenInput.value.trim();
+
+              if (currentToken) {
+                  data.githubToken = currentToken;
+              }
+
+              chrome.storage.sync.set(data, () => {
+                  syncStatus.textContent = window.msg('restoreSuccess');
+                  setTimeout(() => syncStatus.textContent = '', 3000);
+                  loadAllDataAndInit(); // Reload UI
+
+                  // Also reload token UI if it changed (unlikely due to safeguard, but valid)
+                  loadGitHubToken();
+              });
+          }
       } catch (err) {
           syncStatus.textContent = 'Error!';
           alert(window.msg('restoreFail', [err.message]));
@@ -270,35 +394,58 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   function loadGitHubToken() {
-      chrome.storage.local.get('githubToken', (result) => {
+      // Check SYNC first, then LOCAL (migration/fallback)
+      chrome.storage.sync.get('githubToken', (result) => {
           if (result.githubToken) {
               window.githubService.setToken(result.githubToken);
               githubTokenInput.value = result.githubToken;
               updateGitHubUI(true);
+          } else {
+              // Fallback to local
+              chrome.storage.local.get('githubToken', (localResult) => {
+                  if (localResult.githubToken) {
+                      window.githubService.setToken(localResult.githubToken);
+                      githubTokenInput.value = localResult.githubToken;
+                      updateGitHubUI(true);
+
+                      // Auto-migrate to sync?
+                      chrome.storage.sync.set({ githubToken: localResult.githubToken });
+                  }
+              });
           }
       });
   }
 
   // --- Functions ---
 
-  function loadAllData() {
+  function loadAllDataAndInit() {
     chrome.storage.sync.get(null, (items) => {
       allData = items || {};
       renderDomainList();
+
+      // Auto-select domain from URL if present
+      const params = new URLSearchParams(window.location.search);
+      const targetDomain = params.get('domain');
+      if (targetDomain && allData[targetDomain]) {
+          selectDomain(targetDomain);
+      }
     });
   }
 
   function renderDomainList() {
     domainList.innerHTML = '';
     // Filter out restricted keys
-    const restrictedKeys = ['appLanguage'];
+    const restrictedKeys = ['appLanguage', 'githubToken'];
     const domains = Object.keys(allData)
       .filter(key => !restrictedKeys.includes(key))
       .sort();
 
     domains.forEach(domain => {
-      const item = document.createElement('div');
+      // Use anchor tag for deep linking / open in new tab support
+      const item = document.createElement('a');
       item.className = 'domain-item';
+      item.href = `?domain=${encodeURIComponent(domain)}`;
+
       if (domain === currentDomain) {
         item.classList.add('active');
       }
@@ -312,7 +459,25 @@ document.addEventListener('DOMContentLoaded', async () => {
           item.textContent = domain;
       }
 
-      item.addEventListener('click', () => selectDomain(domain));
+      item.addEventListener('click', (e) => {
+          // Allow default behavior if modifier key is pressed (Ctrl/Cmd/Shift)
+          if (e.ctrlKey || e.metaKey || e.shiftKey) {
+              return;
+          }
+
+          // Otherwise, prevent default and use SPA navigation
+          e.preventDefault();
+
+          // If already selected, do nothing or re-select? Re-select is fine.
+
+          // Update URL without reload to reflect selection (pushState)
+          const newUrl = new URL(window.location);
+          newUrl.searchParams.set('domain', domain);
+          window.history.pushState({ domain }, '', newUrl);
+
+          selectDomain(domain);
+      });
+
       domainList.appendChild(item);
     });
 
@@ -364,6 +529,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     currentDomain = null;
     noSelection.classList.remove('hidden');
     editorWrapper.classList.add('hidden');
+
+    // Clear URL param
+    const newUrl = new URL(window.location);
+    newUrl.searchParams.delete('domain');
+    window.history.pushState({}, '', newUrl);
+
     renderDomainList();
   }
 
@@ -375,7 +546,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const saveObj = {};
     saveObj[domain] = newData;
     chrome.storage.sync.set(saveObj, () => {
-      loadAllData(); // Reload to be sure
+      loadAllDataAndInit(); // Reload to be sure
       selectDomain(domain);
     });
   }

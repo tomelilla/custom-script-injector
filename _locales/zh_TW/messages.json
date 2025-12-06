@@ -107,5 +107,39 @@
         "content": "$1"
       }
     }
+  },
+  "backupProgress": {
+    "message": "備份中..."
+  },
+  "backupSuccess": {
+    "message": "備份成功！"
+  },
+  "backupFail": {
+    "message": "備份失敗：$1",
+    "placeholders": {
+      "1": {
+        "content": "$1"
+      }
+    }
+  },
+  "restoreProgress": {
+    "message": "還原中..."
+  },
+  "restoreSuccess": {
+    "message": "還原成功！"
+  },
+  "restoreFail": {
+    "message": "還原失敗：$1",
+    "placeholders": {
+      "1": {
+        "content": "$1"
+      }
+    }
+  },
+  "restoreConfirmMsg": {
+    "message": "這將使用 Gist 的備份覆寫目前所有的腳本。確定要繼續嗎？"
+  },
+  "openSiteBtn": {
+    "message": "開啟網站"
   }
 }
