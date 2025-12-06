@@ -104,5 +104,39 @@
         "content": "$1"
       }
     }
+  },
+  "backupProgress": {
+    "message": "バックアップ中..."
+  },
+  "backupSuccess": {
+    "message": "バックアップ完了！"
+  },
+  "backupFail": {
+    "message": "バックアップ失敗: $1",
+    "placeholders": {
+      "1": {
+        "content": "$1"
+      }
+    }
+  },
+  "restoreProgress": {
+    "message": "復元中..."
+  },
+  "restoreSuccess": {
+    "message": "復元完了！"
+  },
+  "restoreFail": {
+    "message": "復元失敗: $1",
+    "placeholders": {
+      "1": {
+        "content": "$1"
+      }
+    }
+  },
+  "restoreConfirmMsg": {
+    "message": "Gistのバックアップで現在のスクリプトをすべて上書きします。よろしいですか？"
+  },
+  "openSiteBtn": {
+    "message": "サイトを開く"
   }
 }
