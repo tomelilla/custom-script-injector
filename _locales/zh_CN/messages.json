@@ -1,0 +1,111 @@
+{
+  "githubSyncLabel": {
+    "message": "GitHub 同步 (Gist)"
+  },
+  "githubTokenPlaceholder": {
+    "message": "粘贴 GitHub Token (gist 权限)"
+  },
+  "saveTokenBtn": {
+    "message": "保存 Token"
+  },
+  "changeTokenBtn": {
+    "message": "更改 Token"
+  },
+  "tokenSaved": {
+    "message": "Token 已保存！"
+  },
+  "aliasLabel": {
+    "message": "别名 (选填)"
+  },
+  "aliasPlaceholder": {
+    "message": "此网站的自定义名称"
+  },
+  "appName": {
+    "message": "自定义脚本注入器"
+  },
+  "appDesc": {
+    "message": "注入自定义 CSS 与 JavaScript 到网站中。"
+  },
+  "saveBtn": {
+    "message": "保存"
+  },
+  "enabled": {
+    "message": "已启用"
+  },
+  "disabled": {
+    "message": "已停用"
+  },
+  "cssTab": {
+    "message": "CSS"
+  },
+  "jsTab": {
+    "message": "JavaScript"
+  },
+  "importBtn": {
+    "message": "导入"
+  },
+  "exportBtn": {
+    "message": "导出"
+  },
+  "deleteDomainBtn": {
+    "message": "删除域名"
+  },
+  "saveChangesBtn": {
+    "message": "保存更改"
+  },
+  "cancelBtn": {
+    "message": "取消"
+  },
+  "addBtn": {
+    "message": "添加"
+  },
+  "addDomainModalTitle": {
+    "message": "添加新域名"
+  },
+  "noSelectionMsg": {
+    "message": "请选择域名以编辑脚本。"
+  },
+  "domainsTitle": {
+    "message": "域名列表"
+  },
+  "settingsTitle": {
+    "message": "管理所有域名"
+  },
+  "confirmDeleteMsg": {
+    "message": "您确定要删除 $DOMAIN$ 的所有脚本吗？",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "domainExistsMsg": {
+    "message": "域名已存在！"
+  },
+  "importSuccessMsg": {
+    "message": "导入成功！"
+  },
+  "importConfirmMsg": {
+    "message": "这将合并导入的设置与当前的脚本。若有名称冲突，现有域名将被覆盖。是否继续？"
+  },
+  "savedMsg": {
+    "message": "已保存！"
+  },
+  "invalidUrlMsg": {
+    "message": "无法在此页面运行。"
+  },
+  "enterCssPlaceholder": {
+    "message": "在此输入您的自定义 CSS..."
+  },
+  "enterJsPlaceholder": {
+    "message": "在此输入您的自定义 JavaScript..."
+  },
+  "errorImportingMsg": {
+    "message": "导入文件时发生错误：$ERROR$",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  }
+}

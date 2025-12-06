@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <title>Script Injector</title>
+  <link rel="stylesheet"
+        href="popup.css">
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1 data-i18n="appName">Custom Scripts</h1>
+      <button id="settings-btn"
+              data-i18n-title="manageAllDomains"
+              title="Manage All Domains"
+              style="background:none;border:none;color:white;cursor:pointer;font-size:1.2rem;">⚙️</button>
+
+      <div class="toggle-container">
+        <label class="switch">
+          <input type="checkbox"
+                 id="site-toggle">
+          <span class="slider round"></span>
+        </label>
+        <span id="site-status"
+              data-i18n="disabled">Disabled</span>
+      </div>
+    </header>
+
+    <div class="tabs">
+      <button class="tab-btn active"
+              data-tab="css"
+              data-i18n="cssTab">CSS</button>
+      <button class="tab-btn"
+              data-tab="js"
+              data-i18n="jsTab">JavaScript</button>
+    </div>
+
+    <div class="editor-container">
+      <textarea id="code-editor"
+                spellcheck="false"
+                data-i18n-placeholder="enterCodePlaceholder"
+                placeholder="Write your code here..."></textarea>
+    </div>
+
+    <footer>
+      <span id="current-domain">example.com</span>
+      <button id="save-btn"
+              data-i18n="saveBtn">Save</button>
+    </footer>
+  </div>
+  <script src="../scripts/i18n-helper.js"></script>
+  <script src="popup.js"></script>
+</body>
+
+</html>

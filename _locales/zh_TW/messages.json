@@ -1,0 +1,111 @@
+{
+  "githubSyncLabel": {
+    "message": "GitHub 同步 (Gist)"
+  },
+  "githubTokenPlaceholder": {
+    "message": "貼上 GitHub Token (gist 權限)"
+  },
+  "saveTokenBtn": {
+    "message": "儲存 Token"
+  },
+  "changeTokenBtn": {
+    "message": "變更 Token"
+  },
+  "tokenSaved": {
+    "message": "Token 已儲存！"
+  },
+  "aliasLabel": {
+    "message": "別名 (選填)"
+  },
+  "aliasPlaceholder": {
+    "message": "此網站的自訂名稱"
+  },
+  "appName": {
+    "message": "自訂腳本注入器"
+  },
+  "appDesc": {
+    "message": "注入自訂 CSS 與 JavaScript 到網站中。"
+  },
+  "saveBtn": {
+    "message": "儲存"
+  },
+  "enabled": {
+    "message": "已啟用"
+  },
+  "disabled": {
+    "message": "已停用"
+  },
+  "cssTab": {
+    "message": "CSS"
+  },
+  "jsTab": {
+    "message": "JavaScript"
+  },
+  "importBtn": {
+    "message": "匯入"
+  },
+  "exportBtn": {
+    "message": "匯出"
+  },
+  "deleteDomainBtn": {
+    "message": "刪除網域"
+  },
+  "saveChangesBtn": {
+    "message": "儲存變更"
+  },
+  "cancelBtn": {
+    "message": "取消"
+  },
+  "addBtn": {
+    "message": "新增"
+  },
+  "addDomainModalTitle": {
+    "message": "新增網域"
+  },
+  "noSelectionMsg": {
+    "message": "請選擇網域以編輯腳本。"
+  },
+  "domainsTitle": {
+    "message": "網域列表"
+  },
+  "settingsTitle": {
+    "message": "管理所有網域"
+  },
+  "confirmDeleteMsg": {
+    "message": "您確定要刪除 $DOMAIN$ 的所有腳本嗎？",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "domainExistsMsg": {
+    "message": "網域已存在！"
+  },
+  "importSuccessMsg": {
+    "message": "匯入成功！"
+  },
+  "importConfirmMsg": {
+    "message": "這將合併匯入的設定與目前的腳本。若有名稱衝突，現有網域將被覆寫。是否繼續？"
+  },
+  "savedMsg": {
+    "message": "已儲存！"
+  },
+  "invalidUrlMsg": {
+    "message": "無法在此頁面執行。"
+  },
+  "enterCssPlaceholder": {
+    "message": "在此輸入您的自訂 CSS..."
+  },
+  "enterJsPlaceholder": {
+    "message": "在此輸入您的自訂 JavaScript..."
+  },
+  "errorImportingMsg": {
+    "message": "匯入檔案時發生錯誤：$ERROR$",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  }
+}

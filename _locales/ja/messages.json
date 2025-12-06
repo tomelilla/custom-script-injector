@@ -1,0 +1,108 @@
+{
+  "githubSyncLabel": {
+    "message": "GitHub 同期 (Gist)"
+  },
+  "githubTokenPlaceholder": {
+    "message": "GitHub Token を貼り付け (gist スコープ)"
+  },
+  "changeTokenBtn": {
+    "message": "Token を変更"
+  },
+  "tokenSaved": {
+    "message": "Token が保存されました！"
+  },
+  "aliasLabel": {
+    "message": "エイリアス (任意)"
+  },
+  "aliasPlaceholder": {
+    "message": "このサイトのカスタム名"
+  },
+  "appName": {
+    "message": "カスタムスクリプトインジェクター"
+  },
+  "appDesc": {
+    "message": "ウェブサイトにカスタムCSSとJavaScriptを注入します。"
+  },
+  "saveBtn": {
+    "message": "保存"
+  },
+  "enabled": {
+    "message": "有効"
+  },
+  "disabled": {
+    "message": "無効"
+  },
+  "cssTab": {
+    "message": "CSS"
+  },
+  "jsTab": {
+    "message": "JavaScript"
+  },
+  "importBtn": {
+    "message": "インポート"
+  },
+  "exportBtn": {
+    "message": "エクスポート"
+  },
+  "deleteDomainBtn": {
+    "message": "ドメインを削除"
+  },
+  "saveChangesBtn": {
+    "message": "変更を保存"
+  },
+  "cancelBtn": {
+    "message": "キャンセル"
+  },
+  "addBtn": {
+    "message": "追加"
+  },
+  "addDomainModalTitle": {
+    "message": "新しいドメインを追加"
+  },
+  "noSelectionMsg": {
+    "message": "編集するドメインを選択してください。"
+  },
+  "domainsTitle": {
+    "message": "ドメイン"
+  },
+  "settingsTitle": {
+    "message": "全ドメインを管理"
+  },
+  "confirmDeleteMsg": {
+    "message": "$DOMAIN$ のすべてのスクリプトを削除してもよろしいですか？",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "domainExistsMsg": {
+    "message": "ドメインは既に存在します！"
+  },
+  "importSuccessMsg": {
+    "message": "インポートに成功しました！"
+  },
+  "importConfirmMsg": {
+    "message": "インポートされた設定は現在のスクリプトとマージされます。名前が重複する既存のドメインは上書きされます。続行しますか？"
+  },
+  "savedMsg": {
+    "message": "保存しました！"
+  },
+  "invalidUrlMsg": {
+    "message": "このページでは実行できません。"
+  },
+  "enterCssPlaceholder": {
+    "message": "カスタムCSSをここに入力..."
+  },
+  "enterJsPlaceholder": {
+    "message": "カスタムJavaScriptをここに入力..."
+  },
+  "errorImportingMsg": {
+    "message": "ファイルのインポート中にエラーが発生しました：$ERROR$",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  }
+}

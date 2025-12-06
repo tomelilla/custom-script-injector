@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <title>Script Injector Options</title>
+  <link rel="stylesheet"
+        href="../lib/codemirror/codemirror.min.css">
+  <link rel="stylesheet"
+        href="../lib/codemirror/monokai.min.css">
+  <link rel="stylesheet"
+        href="options.css">
+</head>
+
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2 data-i18n="domainsTitle">Domains</h2>
+        <button id="add-domain-btn"
+                class="icon-btn"
+                data-i18n-title="addBtn"
+                title="Add Domain">+</button>
+      </div>
+      <div class="domain-list"
+           id="domain-list">
+        <!-- Domain items will be injected here -->
+      </div>
+      <div class="sidebar-footer"
+           style="padding: 15px; border-top: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 10px;">
+        <select id="language-select"
+                style="width: 100%; padding: 5px; background: var(--bg-color); color: var(--text-color); border: 1px solid var(--border-color); border-radius: 4px;">
+          <option value="en">English</option>
+          <option value="zh_TW">繁體中文</option>
+          <option value="zh_CN">简体中文</option>
+          <option value="ja">日本語</option>
+        </select>
+
+        <!-- GitHub Sync -->
+        <div style="padding-top: 10px; border-top: 1px dashed var(--border-color);">
+          <div data-i18n="githubSyncLabel"
+               style="font-size: 11px; color: #888; margin-bottom: 5px;">GitHub Sync</div>
+          <input type="password"
+                 id="github-token"
+                 data-i18n-placeholder="githubTokenPlaceholder"
+                 style="width: 100%; padding: 5px; margin-bottom: 5px; background: var(--bg-color); color: var(--text-color); border: 1px solid var(--border-color); border-radius: 4px;" />
+          <div style="display: flex; gap: 5px; margin-bottom: 5px;">
+            <button id="save-token-btn"
+                    style="flex: 1;"
+                    data-i18n="saveTokenBtn">Save Token</button>
+          </div>
+
+          <div id="github-actions"
+               class="hidden"
+               style="display: flex; gap: 5px;">
+            <button id="gist-backup-btn"
+                    style="flex: 1;"
+                    data-i18n="backupBtn"
+                    title="Backup to Gist">Backup</button>
+            <button id="gist-restore-btn"
+                    style="flex: 1;"
+                    data-i18n="restoreBtn"
+                    title="Restore from Gist">Restore</button>
+          </div>
+          <div id="sync-status"
+               style="font-size: 10px; color: #666; margin-top: 2px;"></div>
+        </div>
+
+        <div style="display: flex; gap: 10px; margin-top: 10px;">
+          <button id="import-btn"
+                  data-i18n="importBtn"
+                  title="Import"
+                  style="flex:1;">Import</button>
+          <button id="export-btn"
+                  data-i18n="exportBtn"
+                  title="Export"
+                  style="flex:1;">Export</button>
+        </div>
+        <input type="file"
+               id="import-file"
+               accept=".json"
+               style="display:none;" />
+      </div>
+    </aside>
+
+    <main class="main-content"
+          id="main-content">
+      <div id="no-selection"
+           class="empty-state">
+        <p data-i18n="noSelectionMsg">Select a domain to edit scripts.</p>
+      </div>
+
+      <div id="editor-wrapper"
+           class="hidden">
+        <div class="editor-header">
+          <label id="current-domain-title"></label>
+          <div class="actions">
+            <button id="delete-domain-btn"
+                    class="danger-btn"
+                    data-i18n="deleteDomainBtn">Delete</button>
+            <button id="save-btn"
+                    class="primary-btn"
+                    data-i18n="saveBtn"
+                    style="margin-left: 10px;">Save</button>
+            <span id="save-status"
+                  data-i18n="savedMsg"
+                  style="opacity: 0; transition: opacity 0.5s; margin-left: 10px; color: var(--success-color);">Saved!</span>
+          </div>
+        </div>
+
+        <!-- Alias Input -->
+        <div
+             style="padding: 10px 20px; border-bottom: 1px solid var(--border-color); background: var(--header-bg);">
+          <label for="domain-alias"
+                 data-i18n="aliasLabel"
+                 style="font-size: 12px; color: #888; display: block; margin-bottom: 4px;">Alias</label>
+          <input type="text"
+                 id="domain-alias"
+                 data-i18n-placeholder="aliasPlaceholder"
+                 style="width: 100%; padding: 6px; background: var(--bg-color); color: var(--text-color); border: 1px solid var(--border-color); border-radius: 4px;" />
+        </div>
+
+        <div class="tabs">
+          <button class="tab-btn active"
+                  data-tab="css"
+                  data-i18n="cssTab">CSS</button>
+          <button class="tab-btn"
+                  data-tab="js"
+                  data-i18n="jsTab">JavaScript</button>
+          <div class="toggle-container">
+            <label class="switch">
+              <input type="checkbox"
+                     id="site-toggle">
+              <span class="slider round"></span>
+            </label>
+            <span id="site-status"
+                  data-i18n="enabled">Enabled</span>
+          </div>
+        </div>
+
+        <div class="editor-container">
+          <textarea id="code-editor"
+                    spellcheck="false"
+                    placeholder="Write your code here..."></textarea>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="add-domain-modal"
+       class="modal hidden">
+    <div class="modal-content">
+      <h3 data-i18n="addDomainModalTitle">Add New Domain</h3>
+      <input type="text"
+             id="new-domain-input"
+             placeholder="example.com">
+      <div class="modal-actions">
+        <button id="cancel-add-btn"
+                data-i18n="cancelBtn">Cancel</button>
+        <button id="confirm-add-btn"
+                class="primary-btn"
+                data-i18n="confirmAddBtn">Add</button>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <script src="../lib/codemirror/codemirror.min.js"></script>
+  <script src="../lib/codemirror/javascript.min.js"></script>
+  <script src="../lib/codemirror/css.min.js"></script>
+
+  <script src="../scripts/i18n-helper.js"></script>
+  <script src="../scripts/github-helper.js"></script>
+  <script src="options.js"></script>
+</body>
+
+</html>

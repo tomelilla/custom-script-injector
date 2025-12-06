@@ -1,0 +1,111 @@
+{
+  "githubSyncLabel": {
+    "message": "GitHub Sync (Gist)"
+  },
+  "githubTokenPlaceholder": {
+    "message": "Paste GitHub Token (gist scope)"
+  },
+  "saveTokenBtn": {
+    "message": "Save Token"
+  },
+  "changeTokenBtn": {
+    "message": "Change Token"
+  },
+  "tokenSaved": {
+    "message": "Token saved!"
+  },
+  "aliasLabel": {
+    "message": "Alias (Optional)"
+  },
+  "aliasPlaceholder": {
+    "message": "Custom name for this site"
+  },
+  "appName": {
+    "message": "Custom Script Injector"
+  },
+  "appDesc": {
+    "message": "Inject custom CSS and JavaScript into websites."
+  },
+  "saveBtn": {
+    "message": "Save"
+  },
+  "enabled": {
+    "message": "Enabled"
+  },
+  "disabled": {
+    "message": "Disabled"
+  },
+  "cssTab": {
+    "message": "CSS"
+  },
+  "jsTab": {
+    "message": "JavaScript"
+  },
+  "importBtn": {
+    "message": "Import"
+  },
+  "exportBtn": {
+    "message": "Export"
+  },
+  "deleteDomainBtn": {
+    "message": "Delete Domain"
+  },
+  "saveChangesBtn": {
+    "message": "Save Changes"
+  },
+  "cancelBtn": {
+    "message": "Cancel"
+  },
+  "addBtn": {
+    "message": "Add"
+  },
+  "addDomainModalTitle": {
+    "message": "Add New Domain"
+  },
+  "noSelectionMsg": {
+    "message": "Select a domain to edit scripts."
+  },
+  "domainsTitle": {
+    "message": "Domains"
+  },
+  "settingsTitle": {
+    "message": "Manage All Domains"
+  },
+  "confirmDeleteMsg": {
+    "message": "Are you sure you want to delete all scripts for $DOMAIN$?",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "domainExistsMsg": {
+    "message": "Domain already exists!"
+  },
+  "importSuccessMsg": {
+    "message": "Import successful!"
+  },
+  "importConfirmMsg": {
+    "message": "This will merge imported settings with your current scripts. Existing domains depending on name collision will be overwritten. Continue?"
+  },
+  "savedMsg": {
+    "message": "Saved!"
+  },
+  "invalidUrlMsg": {
+    "message": "Cannot run on this page."
+  },
+  "enterCssPlaceholder": {
+    "message": "Enter your custom CSS here..."
+  },
+  "enterJsPlaceholder": {
+    "message": "Enter your custom JavaScript here..."
+  },
+  "errorImportingMsg": {
+    "message": "Error importing file: $ERROR$",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  }
+}
