@@ -56,3 +56,6 @@ MIT License
 
 ## 📦 發布流程
 - [發布說明文件](doc/release-process/PUBLISHING.md)
+
+## 📑 規格說明
+- [功能規格書](doc/specs/FUNCTIONAL_SPEC.md)
