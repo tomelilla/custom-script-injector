@@ -1,5 +1,10 @@
 # Release Notes
 
+## [1.3.1] - 2025-12-06
+
+### 🌐 Localization
+- Completed Simplified Chinese (`zh_CN`) and Japanese (`ja`) translations.
+
 ## [1.3.0] - 2025-12-06
 
 ### ✨ New Features
