@@ -53,3 +53,6 @@ MIT License
 
 - [English](RELEASE_NOTES.md)
 - [中文 (Chinese)](RELEASE_NOTES_zh-TW.md)
+
+## 📦 發布流程
+- [發布說明文件](doc/release-process/PUBLISHING.md)
