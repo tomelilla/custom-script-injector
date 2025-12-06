@@ -1,0 +1,28 @@
+name: Release Chrome Extension
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build and Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create Zip Archive
+        run: |
+          zip -r custom-script-extension-${{ github.ref_name }}.zip . -x "*.git*" -x "*.DS_Store*" -x "*.zip" -x "PUBLISHING.md" -x "RELEASE_NOTES*" -x "README*"
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: custom-script-extension-${{ github.ref_name }}.zip
+          generate_release_notes: true
