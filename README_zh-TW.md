@@ -48,3 +48,8 @@
 ## 📄 授權
 
 MIT License
+
+## 📝 版本更新紀錄 (Release Notes)
+
+- [English](RELEASE_NOTES.md)
+- [中文 (Chinese)](RELEASE_NOTES_zh-TW.md)

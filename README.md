@@ -48,3 +48,8 @@ Built with advanced features to bypass Content Security Policy (CSP) restriction
 ## 📄 License
 
 MIT License
+
+## 📝 Release Notes
+
+- [English](RELEASE_NOTES.md)
+- [中文 (Chinese)](RELEASE_NOTES_zh-TW.md)
