@@ -5,6 +5,9 @@
   "githubTokenPlaceholder": {
     "message": "GitHub Token を貼り付け (gist スコープ)"
   },
+  "saveTokenBtn": {
+    "message": "Token を保存"
+  },
   "changeTokenBtn": {
     "message": "Token を変更"
   },

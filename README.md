@@ -56,6 +56,7 @@ MIT License
 
 ## 📦 Publishing
 - [Release Process](doc/release-process/PUBLISHING.md)
+- [Store Listing Description](doc/store-listing/STORE_LISTING.md)
 
 ## 📑 Specifications
 - [Functional Spec](doc/specs/FUNCTIONAL_SPEC.md)

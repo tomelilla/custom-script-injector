@@ -296,7 +296,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (result.appLanguage) {
       languageSelect.value = result.appLanguage;
     } else {
-      languageSelect.value = 'en';
+      languageSelect.value = window.getLang ? window.getLang() : 'en';
     }
   });
   languageSelect.addEventListener('change', () => {

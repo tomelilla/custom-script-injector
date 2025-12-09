@@ -8,8 +8,32 @@ let currentLang = 'en'; // Default to 'en' manually if not set, instead of relyi
 async function initI18n() {
   return new Promise((resolve) => {
     chrome.storage.sync.get('appLanguage', async (result) => {
-      // Default to 'en' if not set
-      currentLang = result.appLanguage || 'en';
+      // Default to auto-detect if not set
+      if (result.appLanguage) {
+        currentLang = result.appLanguage;
+      } else {
+        // Auto-detect browser language
+        const uiLang = chrome.i18n.getUILanguage().replace('-', '_');
+        const supported = ['en', 'zh_TW', 'zh_CN', 'ja'];
+        const baseLang = uiLang.split('_')[0];
+
+        if (supported.includes(uiLang)) {
+          currentLang = uiLang;
+        } else if (supported.includes(baseLang)) {
+          // Fallback to base language (e.g. ja_JP -> ja)
+          currentLang = baseLang;
+        } else if (uiLang.startsWith('zh')) {
+           // Fallback for other Chinese variants
+           currentLang = (uiLang === 'zh_CN' || uiLang === 'zh_SG') ? 'zh_CN' : 'zh_TW';
+        } else {
+          currentLang = 'en';
+        }
+
+        // Ensure strictly supported
+        if (!supported.includes(currentLang)) {
+            currentLang = 'en';
+        }
+      }
 
       try {
         const url = chrome.runtime.getURL(`_locales/${currentLang}/messages.json`);
@@ -81,6 +105,7 @@ function msg(key, placeholders) {
 // Expose globally
 window.initI18n = initI18n;
 window.msg = msg;
+window.getLang = () => currentLang;
 
 // Auto-run translation on DOMContentLoaded, but user must call initI18n first manually if they want async load.
 // However, since we need to wait for storage, we can't just auto-run synchronously.

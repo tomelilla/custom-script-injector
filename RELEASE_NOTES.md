@@ -1,6 +1,12 @@
 # Release Notes
 
-## [1.3.1] - 2025-12-06
+## [1.3.3] - 2025-12-09
+
+### 🌐 Localization
+- **Improved Language Detection**: Fixed an issue where regional locales (e.g., `ja-JP`) were incorrectly falling back to English instead of the base language (`ja`).
+- **UI Consistency**: The "Language" dropdown in Options now correctly reflects the detected system language by default.
+
+## [1.3.2] - 2025-12-06
 
 ### 🌐 Localization
 - Completed Simplified Chinese (`zh_CN`) and Japanese (`ja`) translations.
