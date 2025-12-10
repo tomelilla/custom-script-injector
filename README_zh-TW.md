@@ -54,8 +54,14 @@ MIT License
 - [English](RELEASE_NOTES.md)
 - [中文 (Chinese)](RELEASE_NOTES_zh-TW.md)
 
+## 🔒 隱私權政策 (Privacy Policy)
+
+- [English](docs/privacy_policy/PRIVACY_POLICY.md)
+- [中文 (Chinese)](docs/privacy_policy/PRIVACY_POLICY_zh-TW.md)
+
 ## 📦 發布流程
-- [發布說明文件](doc/release-process/PUBLISHING.md)
+- [發布說明文件](docs/release-process/PUBLISHING.md)
+- [商店清單說明](docs/store-listing/STORE_LISTING.md)
 
 ## 📑 規格說明
-- [功能規格書](doc/specs/FUNCTIONAL_SPEC.md)
+- [功能規格書](docs/specs/FUNCTIONAL_SPEC.md)
